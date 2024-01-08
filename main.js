@@ -25,12 +25,13 @@ app.get('/', (req, res) => {
 app.use(express.static(path.join(__dirname, 'public')));
 
 
+
 // Set up the connection pool
 const pool = new Pool({
-    user: 'amcukhzxzjkiij',
-    host: 'ec2-52-1-92-133.compute-1.amazonaws.com',
-    database: 'd9r2khrjn9to7p',
-    password: '38d10396db172d8993a4bfb547c8b734fc1d1b4ee8370558a217a7d8ae67c354',
+    user: 'iqtbqvpacrddxr',
+    host: 'ec2-44-206-18-218.compute-1.amazonaws.com',
+    database: 'd1k50gss0f1psn',
+    password: 'f8d954a78f946cbba2fa4fef4d6acc5140a455b3afc093afb8d2479065bab910',
     port: 5432,
     ssl: {
         rejectUnauthorized: false // This will allow connections to a server with a self-signed certificate.
@@ -115,7 +116,6 @@ app.post('/add-food', async (req, res) => {
 
 
 ///////////////////////////////////
-
 
 // GET endpoint to retrieve food records for the logged-in user
 app.get('/get-food-records', async (req, res) => {
