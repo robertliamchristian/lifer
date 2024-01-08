@@ -7,3 +7,4 @@ join food f on f.Userref = a.id
 --join expenses ex on ex.Userref = a.id
 --join habits h on h.Userref = a.id
 --where a.id = 1
+
