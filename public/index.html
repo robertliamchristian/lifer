@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Food Record</title>
+    <script src="scripts/scripts.js"></script>
+</head>
+<body>
+    <h2>Add Food Record</h2>
+    <form id="foodForm" action="/add-food" method="post">
+        <!-- Remove the userref input field -->
+        <input type="text" name="foodName" placeholder="Food Name" required><br>
+        <input type="number" name="calories" placeholder="Calories" required><br>
+        <textarea name="notes" placeholder="Notes"></textarea><br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <h2>Food Records</h2>
+    <table id="foodRecordsTable">
+        <thead>
+            <tr>
+                <th>Food Name</th>
+                <th>Calories</th>
+                <th>Notes</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Food records will be populated here -->
+        </tbody>
+    </table>
+
+
+
+
+
+
+
+</body>
+</html>
