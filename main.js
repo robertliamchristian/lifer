@@ -180,7 +180,7 @@ app.get('/get-journal-entries', async (req, res) => {
         res.status(500).json({ message: 'Error retrieving journal entries' });
     }
 });
-////////////
+
 
 // POST endpoint to add a new expense
 app.post('/add-expense', async (req, res) => {
@@ -230,6 +230,56 @@ app.get('/get-expense-records', async (req, res) => {
         res.status(500).json({ message: 'Error retrieving expense entries' });
     }
 });
+
+// POST endpoint to add a new exercise
+app.post('/add-exercise', async (req, res) => {
+    // Check if the user is logged in
+    if (!req.session.userId) {
+        return res.status(401).send('User not authenticated');
+    }
+
+    try {
+        const { exercisename, caloriesburned, exercisetime } = req.body;
+
+        // Use the userId from the session instead of the request body
+        const userref = req.session.userId;
+
+        // SQL query to insert data
+        const query = 'INSERT INTO exercise (Userref, exercisename, caloriesburned, exercisetime) VALUES ($1, $2, $3, $4)';
+        const values = [userref, exercisename, caloriesburned, exercisetime];
+
+        // Execute the query
+        await pool.query(query, values);
+
+        res.status(201).send('Exercise added successfully');
+    } catch (error) {
+        console.error('Error adding exercise entry', error);
+        res.status(500).send('Error adding exercise entry');
+    }
+});
+
+// GET endpoint to retrieve exercise entries for the logged-in user
+app.get('/get-exercise-records', async (req, res) => {
+    // Check if the user is logged in
+    if (!req.session.userId) {
+        return res.status(401).json({ message: 'User not authenticated' });
+    }
+
+    try {
+        // Retrieve all expense entries for the logged-in user
+        const result = await pool.query(
+            'SELECT * FROM exercise WHERE Userref = $1 ORDER BY date DESC',
+            [req.session.userId]
+        );
+
+        // Send the result back to the client
+        res.status(200).json(result.rows);
+    } catch (error) {
+        console.error('Error retrieving exercise entries', error);
+        res.status(500).json({ message: 'Error retrieving exercise entries' });
+    }
+});
+
 
 const port = 3000;
 app.listen(port, () => {

@@ -168,4 +168,73 @@ function fetchAndDisplayExpenseRecords() {
 // Call the function when the page loads
 document.addEventListener('DOMContentLoaded', fetchAndDisplayExpenseRecords);
 
+
+
+
+// Add JavaScript to handle the form submission
+document.getElementById('exerciseForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the default form submission
+    var formData = {
+        // Remove the userref field and let the server populate it
+        exercisename: document.getElementsByName('exercisename')[0].value,
+        caloriesburned: document.getElementsByName('caloriesburned')[0].value,
+        exercisetime: document.getElementsByName('exercisetime')[0].value,
+    };
+    fetch('/add-exercise', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => response.text())
+    .then(data => {
+        alert(data); // Alert the result
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+});
+
+
+function fetchAndDisplayExerciseRecords() {
+    fetch('/get-exercise-records')
+    .then(response => response.json())
+    .then(exerciseRecords => {
+        const tableBody = document.getElementById('exerciseRecordsTable').getElementsByTagName('tbody')[0];
+        tableBody.innerHTML = ''; // Clear existing table data
+
+        let totalCaloriesBurned = 0;
+
+        // Populate the table with food records
+        exerciseRecords.forEach(record => {
+            let row = tableBody.insertRow();
+            row.insertCell(0).textContent = record.exercisename;
+            row.insertCell(1).textContent = record.caloriesburned;
+            row.insertCell(2).textContent = record.exercisetime;
+            row.insertCell(3).textContent = new Date(record.date).toLocaleString();
+
+            // Add to total calories
+            totalCalories += parseInt(record.calories);
+        });
+
+        // Add total row
+        let totalRow = tableBody.insertRow();
+        totalRow.insertCell(0).textContent = 'Total';
+        totalRow.insertCell(1).textContent = totalCaloriesBurned;
+        totalRow.insertCell(2); // Empty cell
+        totalRow.insertCell(3); // Empty cell
+
+
+        // Style the total row if needed
+        totalRow.style.fontWeight = 'bold';
+
+    })
+    .catch(error => console.error('Error fetching exercise records:', error));
+}
+
+
+// Call the function when the page loads
+document.addEventListener('DOMContentLoaded', fetchAndDisplayExerciseRecords);
+
     

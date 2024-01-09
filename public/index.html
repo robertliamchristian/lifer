@@ -47,6 +47,21 @@
     </tbody>
 </table>
 
+<h2>Exercise</h2>
+<table id="exerciseRecordsTable">
+    <thead>
+        <tr>
+            <th>Exercise</th>
+            <th>Calories Burned</th>
+            <th>Time</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Journal entries will be populated here -->
+    </tbody>
+</table>
+
 
 
     <h2>Add Food</h2>
@@ -68,6 +83,14 @@
 <form id="expenseForm" action="/add-expense" method="post">
     <input type="text" name="expenseName" placeholder="Expense" required><br>
     <input type="number" name="expenseAmount" placeholder="Amount" required><br>
+    <button type="submit">Submit</button>
+</form>
+
+<h2>Add Exercise</h2>
+<form id="exerciseForm" action="/add-exercise" method="post">
+    <input type="text" name="exercisename" placeholder="Exercise" required><br>
+    <input type="number" name="caloriesburned" placeholder="Calories Burned" required><br>
+    <input type="number" name="exercisetime" placeholder="Time" required><br>
     <button type="submit">Submit</button>
 </form>
 
