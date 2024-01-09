@@ -8,7 +8,11 @@ join food f on f.Userref = a.id
 --join habits h on h.Userref = a.id
 --where a.id = 1
 
-delete from journal where userref = 2
+delete from journal where userref = 2 
+delete from food where userref = 2 
+delete from expenses where userref = 2 
 
 select * from journal
+select * from expenses
+select * from food
 

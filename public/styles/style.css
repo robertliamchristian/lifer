@@ -19,3 +19,13 @@ th {
     color: #333;
 }
 
+input[type="text"],input[type="number"],
+textarea {
+    padding: 8px;
+    border: 1px solid #ddd;
+    background-color: #7b8ee4;
+    border-radius: 4px;
+    color: white;
+    min-width: 75%;
+}
+

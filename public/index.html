@@ -11,7 +11,6 @@
             <tr>
                 <th>Food Name</th>
                 <th>Calories</th>
-                <th>Notes</th>
                 <th>Date</th>
             </tr>
         </thead>
@@ -33,19 +32,42 @@
         <!-- Journal entries will be populated here -->
     </tbody>
 </table>
-    <h2>Add Food Record</h2>
+
+<h2>Expenses</h2>
+<table id="expenseRecordsTable">
+    <thead>
+        <tr>
+            <th>Expense</th>
+            <th>Amount</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Journal entries will be populated here -->
+    </tbody>
+</table>
+
+
+
+    <h2>Add Food</h2>
     <form id="foodForm" action="/add-food" method="post">
         <!-- Remove the userref input field -->
-        <input type="text" name="foodName" placeholder="Food Name" required><br>
+        <input type="text" name="foodname" placeholder="Food Name" required><br>
         <input type="number" name="calories" placeholder="Calories" required><br>
-        <textarea name="foodNotes" placeholder="Notes"></textarea>
         <button type="submit">Submit</button>
     </form>
 
     <h2>Add Journal Entry</h2>
 <form id="journalForm" action="/add-journal" method="post">
     <input type="text" name="title" placeholder="Title" required><br>
-    <textarea name="notes" placeholder="Notes"></textarea>
+    <textarea name="journalNotes" placeholder="Notes"></textarea>
+    <button type="submit">Submit</button>
+</form>
+
+<h2>Add Expense</h2>
+<form id="expenseForm" action="/add-expense" method="post">
+    <input type="text" name="expenseName" placeholder="Expense" required><br>
+    <input type="number" name="expenseAmount" placeholder="Amount" required><br>
     <button type="submit">Submit</button>
 </form>
 

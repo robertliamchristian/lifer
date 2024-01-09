@@ -90,14 +90,14 @@ app.post('/add-food', async (req, res) => {
     }
 
     try {
-        const { foodName, calories, notes } = req.body;
+        const { foodname, calories} = req.body;
 
         // Use the userId from the session instead of the request body
         const userref = req.session.userId;
 
         // SQL query to insert data
-        const query = 'INSERT INTO Food (Userref, FoodName, Calories, notes) VALUES ($1, $2, $3, $4)';
-        const values = [userref, foodName, calories, notes];
+        const query = 'INSERT INTO Food (Userref, foodname, Calories) VALUES ($1, $2, $3)';
+        const values = [userref, foodname, calories];
 
         // Execute the query
         await pool.query(query, values);
@@ -140,14 +140,14 @@ app.post('/add-journal', async (req, res) => {
     }
 
     try {
-        const { title, notes } = req.body;
+        const { title, journalNotes } = req.body;
 
         // Use the userId from the session instead of the request body
         const userref = req.session.userId;
 
         // SQL query to insert data
         const query = 'INSERT INTO Journal (Userref, Title, notes) VALUES ($1, $2, $3)';
-        const values = [userref, title, notes];
+        const values = [userref, title, journalNotes];
 
         // Execute the query
         await pool.query(query, values);
@@ -180,7 +180,56 @@ app.get('/get-journal-entries', async (req, res) => {
         res.status(500).json({ message: 'Error retrieving journal entries' });
     }
 });
+////////////
 
+// POST endpoint to add a new expense
+app.post('/add-expense', async (req, res) => {
+    // Check if the user is logged in
+    if (!req.session.userId) {
+        return res.status(401).send('User not authenticated');
+    }
+
+    try {
+        const { expenseName, expenseAmount, notes } = req.body;
+
+        // Use the userId from the session instead of the request body
+        const userref = req.session.userId;
+
+        // SQL query to insert data
+        const query = 'INSERT INTO expenses (Userref, expensename, expenseamount, notes) VALUES ($1, $2, $3, $4)';
+        const values = [userref, expenseName, expenseAmount, notes];
+
+        // Execute the query
+        await pool.query(query, values);
+
+        res.status(201).send('Expense added successfully');
+    } catch (error) {
+        console.error('Error adding expense entry', error);
+        res.status(500).send('Error adding expense entry');
+    }
+});
+
+// GET endpoint to retrieve expense entries for the logged-in user
+app.get('/get-expense-records', async (req, res) => {
+    // Check if the user is logged in
+    if (!req.session.userId) {
+        return res.status(401).json({ message: 'User not authenticated' });
+    }
+
+    try {
+        // Retrieve all expense entries for the logged-in user
+        const result = await pool.query(
+            'SELECT * FROM expenses WHERE Userref = $1 ORDER BY date DESC',
+            [req.session.userId]
+        );
+
+        // Send the result back to the client
+        res.status(200).json(result.rows);
+    } catch (error) {
+        console.error('Error retrieving expense entries', error);
+        res.status(500).json({ message: 'Error retrieving expense entries' });
+    }
+});
 
 const port = 3000;
 app.listen(port, () => {
