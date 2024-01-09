@@ -82,9 +82,6 @@ app.post('/login-endpoint', async (req, res) => {
     }
 });
 
-
-///////////////////////////////////////////
-
 // POST endpoint to add a new food record
 app.post('/add-food', async (req, res) => {
     // Check if the user is logged in
@@ -112,11 +109,6 @@ app.post('/add-food', async (req, res) => {
     }
 });
 
-
-
-
-///////////////////////////////////
-
 // GET endpoint to retrieve food records for the logged-in user
 app.get('/get-food-records', async (req, res) => {
     // Check if the user is logged in
@@ -136,6 +128,56 @@ app.get('/get-food-records', async (req, res) => {
     } catch (error) {
         console.error('Error retrieving food records', error);
         res.status(500).json({ message: 'Error retrieving food records' });
+    }
+});
+
+
+// POST endpoint to add a new journal entry
+app.post('/add-journal', async (req, res) => {
+    // Check if the user is logged in
+    if (!req.session.userId) {
+        return res.status(401).send('User not authenticated');
+    }
+
+    try {
+        const { title, notes } = req.body;
+
+        // Use the userId from the session instead of the request body
+        const userref = req.session.userId;
+
+        // SQL query to insert data
+        const query = 'INSERT INTO Journal (Userref, Title, notes) VALUES ($1, $2, $3)';
+        const values = [userref, title, notes];
+
+        // Execute the query
+        await pool.query(query, values);
+
+        res.status(201).send('Journal entry added successfully');
+    } catch (error) {
+        console.error('Error adding journal entry', error);
+        res.status(500).send('Error adding journal entry');
+    }
+});
+
+// GET endpoint to retrieve journal entries for the logged-in user
+app.get('/get-journal-entries', async (req, res) => {
+    // Check if the user is logged in
+    if (!req.session.userId) {
+        return res.status(401).json({ message: 'User not authenticated' });
+    }
+
+    try {
+        // Retrieve all journal entries for the logged-in user
+        const result = await pool.query(
+            'SELECT * FROM Journal WHERE Userref = $1 ORDER BY date DESC',
+            [req.session.userId]
+        );
+
+        // Send the result back to the client
+        res.status(200).json(result.rows);
+    } catch (error) {
+        console.error('Error retrieving journal entries', error);
+        res.status(500).json({ message: 'Error retrieving journal entries' });
     }
 });
 
