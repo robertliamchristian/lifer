@@ -9,7 +9,7 @@ join food f on f.Userref = a.id
 --where a.id = 1
 
 delete from journal where userref = 2 
-delete from food where userref = 2 
+delete from food where userref = 2 and date > '2024-01-10'
 delete from expenses where userref = 2 
 delete from exercise where userref = 2
 
@@ -18,3 +18,12 @@ select * from expenses
 select * from food
 select * from exercise
 
+SELECT 
+            f.id,
+            f.userref,
+            f.foodname,
+            f.calories,
+            f.notes,
+            (f.date - interval '8 hours') as datetime 
+          FROM 
+            Food f 
