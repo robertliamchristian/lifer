@@ -13,13 +13,13 @@ CREATE TABLE Food (
     date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (Userref) REFERENCES AllUser(Id)
 );
-
+--drop table Exercise
 CREATE TABLE Exercise (
     Id SERIAL PRIMARY KEY,
     Userref INT,
     ExerciseName VARCHAR(255),
     CaloriesBurned INT,
-    notes TEXT,
+    ExerciseTime INT,
     date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (Userref) REFERENCES AllUser(Id)
 );

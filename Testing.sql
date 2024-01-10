@@ -11,8 +11,10 @@ join food f on f.Userref = a.id
 delete from journal where userref = 2 
 delete from food where userref = 2 
 delete from expenses where userref = 2 
+delete from exercise where userref = 2
 
 select * from journal
 select * from expenses
 select * from food
+select * from exercise
 
