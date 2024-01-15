@@ -18,6 +18,18 @@
             <!-- Food records will be populated here -->
         </tbody>
     </table>
+    <br>
+    <div class="dropdown-container">
+        <button class="dropdown-btn">Add Food</button>
+        <div class="dropdown-content">
+        <form id="foodForm" action="/add-food" method="post">
+            <!-- Remove the userref input field -->
+            <input type="text" name="foodname" placeholder="Food Name" required><br>
+            <input type="number" name="calories" placeholder="Calories" required><br>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    </div>
 
     <h2>Journal</h2>
 <table id="journalEntriesTable">
@@ -32,6 +44,17 @@
         <!-- Journal entries will be populated here -->
     </tbody>
 </table>
+<br>
+<div class="dropdown-container">
+    <button class="dropdown-btn">Add Journal Entry</button>
+    <div class="dropdown-content">
+    <form id="journalForm" action="/add-journal" method="post">
+        <input type="text" name="title" placeholder="Title" required><br>
+        <textarea name="journalNotes" placeholder="Notes"></textarea><br>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+</div>
 
 <h2>Expenses</h2>
 <table id="expenseRecordsTable">
@@ -46,6 +69,17 @@
         <!-- Journal entries will be populated here -->
     </tbody>
 </table>
+<br>
+<div class="dropdown-container">
+    <button class="dropdown-btn">Add Expense</button>
+    <div class="dropdown-content">
+    <form id="expenseForm" action="/add-expense" method="post">
+        <input type="text" name="expenseName" placeholder="Expense" required><br>
+        <input type="number" name="expenseAmount" placeholder="Amount" required><br>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+</div>
 
 <h2>Exercise</h2>
 <table id="exerciseRecordsTable">
@@ -61,38 +95,27 @@
         <!-- Journal entries will be populated here -->
     </tbody>
 </table>
-
-
-
-    <h2>Add Food</h2>
-    <form id="foodForm" action="/add-food" method="post">
-        <!-- Remove the userref input field -->
-        <input type="text" name="foodname" placeholder="Food Name" required><br>
-        <input type="number" name="calories" placeholder="Calories" required><br>
+<br>
+<div class="dropdown-container">
+    <button class="dropdown-btn">Add Exercise</button>
+    <div class="dropdown-content">
+    <form id="exerciseForm" action="/add-exercise" method="post">
+        <input type="text" name="exercisename" placeholder="Exercise" required><br>
+        <input type="number" name="caloriesburned" placeholder="Calories Burned" required><br>
+        <input type="number" name="exercisetime" placeholder="Time" required><br>
         <button type="submit">Submit</button>
     </form>
+</div>
+</div>
 
-    <h2>Add Journal Entry</h2>
-<form id="journalForm" action="/add-journal" method="post">
-    <input type="text" name="title" placeholder="Title" required><br>
-    <textarea name="journalNotes" placeholder="Notes"></textarea>
-    <button type="submit">Submit</button>
-</form>
 
-<h2>Add Expense</h2>
-<form id="expenseForm" action="/add-expense" method="post">
-    <input type="text" name="expenseName" placeholder="Expense" required><br>
-    <input type="number" name="expenseAmount" placeholder="Amount" required><br>
-    <button type="submit">Submit</button>
-</form>
 
-<h2>Add Exercise</h2>
-<form id="exerciseForm" action="/add-exercise" method="post">
-    <input type="text" name="exercisename" placeholder="Exercise" required><br>
-    <input type="number" name="caloriesburned" placeholder="Calories Burned" required><br>
-    <input type="number" name="exercisetime" placeholder="Time" required><br>
-    <button type="submit">Submit</button>
-</form>
+
+
+
+
+
+
 
 
 

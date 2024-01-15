@@ -260,3 +260,39 @@ function fetchAndDisplayExerciseRecords() {
 document.addEventListener('DOMContentLoaded', fetchAndDisplayExerciseRecords);
 
     
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    var rows = document.querySelectorAll('table tr');
+
+    rows.forEach(function(row) {
+        row.addEventListener('mouseenter', function() {
+            this.style.backgroundColor = '#5c6bc0';
+        });
+        row.addEventListener('mouseleave', function() {
+            this.style.backgroundColor = '';
+        });
+    });
+});
+
+
+
+document.querySelectorAll('.dropdown-btn').forEach(button => {
+    button.addEventListener('click', () => {
+        const dropdownContent = button.nextElementSibling;
+        
+        if (dropdownContent.style.display === "block") {
+            dropdownContent.style.display = "none";
+        } else {
+            // Close other open forms
+            document.querySelectorAll('.dropdown-content').forEach(div => {
+                div.style.display = "none";
+            });
+
+            // Show the clicked form
+            dropdownContent.style.display = "block";
+        }
+    });
+});
